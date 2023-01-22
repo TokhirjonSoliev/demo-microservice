@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      database: product_service
+      port: 27017
+      host: host.docker.internal
+server:
+  port: 8082

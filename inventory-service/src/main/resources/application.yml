@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: inventory-service
+  cassandra:
+    keyspace-name: inventory_service
+    contact-points: 127.0.0.1
+    port: 9042
+    local-datacenter: datacenter1
+    schema-action: create_if_not_exists
+server:
+  port: 8084
