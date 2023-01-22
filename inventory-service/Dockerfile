@@ -14,5 +14,5 @@ WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/*.jar /app/
 
-EXPOSE 8761
+EXPOSE 8084
 ENTRYPOINT ["java", "-jar", "*.jar"]

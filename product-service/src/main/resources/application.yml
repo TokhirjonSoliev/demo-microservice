@@ -5,6 +5,6 @@ spring:
     mongodb:
       database: product_service
       port: 27017
-      host: host.docker.internal
+      host: localhost
 server:
   port: 8082

@@ -1,0 +1,149 @@
+networks:
+  microservice:
+    driver: bridge
+
+version: '3.7'
+services:
+  ## PostgresSQL Docker Compose Config
+  postgres-user:
+    container_name: postgres-user
+    image: postgres
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_DB: user_service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+      PGDATA: /data/postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - microservice
+
+  ## Mongo Docker Compose Config
+  product-mongo:
+    container_name: product-mongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - ./mongo-data:/data/db
+    networks:
+      microservice:
+
+  ## MySQL Docker Compose Config
+  mysql-order:
+    container_name: mysql-order
+    image: mysql
+    environment:
+      MYSQL_DATABASE: order_service
+      MYSQL_USER: root
+      MYSQL_PASSWORD: John123$
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      microservice:
+
+  ## Cassandra Docker Compose Config
+  cassandra-inventory:
+    container_name: cassandra-inventory
+    image: cassandra:3.11.14
+    ports:
+      - "9042:9042"
+    expose:
+      - "9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=datacenter1
+    volumes:
+      - db-data:/var/lib/cassandra
+    networks:
+      microservice:
+
+
+  ## Eureka Server
+  discovery-server:
+    image: discovery-server
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    networks:
+      microservice:
+
+  ## api-gateway
+  api-gateway:
+    image: api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    depends_on:
+      - discovery-server
+    networks:
+      microservice:
+
+
+  ## User-Service Docker Compose Config
+  user-service:
+    image: user-service
+    container_name: user-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-user:5432/user_service
+    depends_on:
+      - postgres-user
+      - discovery-server
+      - api-gateway
+    networks:
+      microservice:
+
+  ## Product-Service Docker Compose Config
+  product-service:
+    image: product-service
+    container_name: product-service
+    environment:
+      - SPRING_DATASOURCE_URL=mongodb://product-mongo:27017/product_service
+    depends_on:
+      - product-mongo
+      - discovery-server
+      - api-gateway
+    networks:
+      microservice:
+
+  ## Order-Service Docker Compose Config
+  order-service:
+    image: order-service
+    container_name: order-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-order:3306/order_service
+    depends_on:
+      - mysql-order
+      - discovery-server
+      - api-gateway
+    networks:
+      microservice:
+
+  ## Inventory-Service Docker Compose Config
+  inventory-service:
+    image: inventory-service
+    container_name: inventory-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:cassandra://cassandra-inventory:9042/inventory_service
+    depends_on:
+      - cassandra-inventory
+      - discovery-server
+      - api-gateway
+    networks:
+      microservice:
+
+volumes:
+  db-data:
