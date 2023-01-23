@@ -74,8 +74,6 @@ services:
   discovery-server:
     image: tokhirjon1799/discovery-server:latest
     container_name: discovery-server
-    build:
-      context: ./discovery
     ports:
       - "8761:8761"
     networks:
@@ -85,8 +83,6 @@ services:
   api-gateway:
     image: tokhirjon1799/api-gateway:latest
     container_name: api-gateway
-    build:
-      context: ./gateway
     ports:
       - "8080:8080"
     expose:
@@ -101,8 +97,6 @@ services:
   user-service:
     image: tokhirjon1799/user-service:latest
     container_name: user-service
-    build:
-      context: ./user-service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-user:5432/user_service
     depends_on:
@@ -116,8 +110,6 @@ services:
   product-service:
     image: tokhirjon1799/product-service:latest
     container_name: product-service
-    build:
-      context: ./product-service
     environment:
       - SPRING_DATASOURCE_URL=mongodb://product-mongo:27017/product_service
     depends_on:
@@ -131,8 +123,6 @@ services:
   order-service:
     image: tokhirjon1799/order-service:latest
     container_name: order-service
-    build:
-      context: ./order-service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-order:3306/order_service
     depends_on:
@@ -146,8 +136,6 @@ services:
   inventory-service:
     image: tokhirjon1799/inventory-service:latest
     container_name: inventory-service
-    build:
-      context: ./inventory-service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:cassandra://cassandra-inventory:9042/inventory_service
     depends_on:
