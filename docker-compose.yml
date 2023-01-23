@@ -13,10 +13,10 @@ services:
     expose:
       - "5432"
     environment:
-      POSTGRES_DB: user_service
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1
-      PGDATA: /data/postgres
+      - POSTGRES_DB=user_service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+      - PGDATA=/data/postgres
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: always
@@ -42,9 +42,9 @@ services:
     container_name: mysql-order
     image: mysql
     environment:
-      MYSQL_DATABASE: order_service
-      MYSQL_USER: root
-      MYSQL_PASSWORD: John123$
+      - MYSQL_DATABASE=order_service
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=John123$
     ports:
       - '3306:3306'
     expose:
