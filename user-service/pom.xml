@@ -119,6 +119,17 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <image>altairbob/jdk-17-sshd</image>
+                    </from>
+                    <to><image>registry.hub.docker.com/tokhir1799/${artifactId}</image></to>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <repositories>
