@@ -44,7 +44,7 @@ services:
     environment:
       - MYSQL_DATABASE=order_service
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=John123$$
+      - MYSQL_PASSWORD=root
     ports:
       - '3306:3306'
     expose:
