@@ -13,7 +13,7 @@ FROM altairbob/jdk-17-sshd
 WORKDIR /app/discovery-server
 
 ARG JAR_FILE=target/*.jar
-COPY  ${JAR_FILE} discovery.jar
+ADD  ${JAR_FILE} discovery.jar
 
 EXPOSE 8761
 ENTRYPOINT ["java", "-jar", "discovery.jar"]
