@@ -10,10 +10,9 @@ RUN mvn clean package
 
 FROM altairbob/jdk-17-sshd
 
-WORKDIR /app/api-gateway
+WORKDIR /app
 
-ARG JAR_FILE=target/api-gateway-0.0.1-SNAPSHOT.jar
-COPY  ${JAR_FILE} gateway.jar
+COPY --from=MAVEN_BUILD /build/target/*.jar /app/gateway.jar
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "gateway.jar"]
+ENTRYPOINT ["java", "-jar", "/app/gateway.jar"]

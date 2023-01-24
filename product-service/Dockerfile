@@ -10,10 +10,9 @@ RUN mvn clean package
 
 FROM altairbob/jdk-17-sshd
 
-WORKDIR /app/product-service
+WORKDIR /app
 
-ARG JAR_FILE=target/demo2-0.0.1-SNAPSHOT.jar
-COPY  ${JAR_FILE} product-service.jar
+COPY --from=MAVEN_BUILD /build/target/*.jar /app/product-service.jar
 
 EXPOSE 8082
-ENTRYPOINT ["java", "-jar", "product-service.jar"]
+ENTRYPOINT ["java", "-jar", "/app/product-service.jar"]

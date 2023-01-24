@@ -10,10 +10,9 @@ RUN mvn clean package
 
 FROM altairbob/jdk-17-sshd
 
-WORKDIR /app/user-service
+WORKDIR /app
 
-ARG JAR_FILE=target/user-service-0.0.1-SNAPSHOT.jar
-COPY  ${JAR_FILE} user-service.jar
+COPY --from=MAVEN_BUILD /build/target/*.jar /app/user-service.jar
 
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "user-service.jar"]
+ENTRYPOINT ["java", "-jar", "/app/user-service.jar"]
