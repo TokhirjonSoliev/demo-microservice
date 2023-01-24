@@ -3,14 +3,20 @@ spring:
     name: order-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/order_service
+    url: jdbc:mysql://165.232.114.125:3307/order_service
     username: root
-    password: John123$
+    password: root
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8671/eureka/
 server:
   port: 8083

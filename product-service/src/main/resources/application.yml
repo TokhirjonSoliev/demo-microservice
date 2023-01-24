@@ -5,6 +5,12 @@ spring:
     mongodb:
       database: product_service
       port: 27017
-      host: product-mongo
+      host: 165.232.114.125
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8671/eureka/
 server:
   port: 8082
