@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      database: product_service
+      port: 27017
+      host: 165.232.114.125
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+server:
+  port: 8082

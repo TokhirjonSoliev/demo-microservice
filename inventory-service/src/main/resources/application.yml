@@ -1,17 +1,3 @@
 spring:
-  application:
-    name: inventory-service
-  cassandra:
-    keyspace-name: inventory_service
-    contact-points: 165.232.114.125
-    port: 9042
-    local-datacenter: datacenter1
-    schema-action: create_if_not_exists
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://165.232.114.125:8671/eureka/
-server:
-  port: 8084
+  profiles:
+    active: prod
