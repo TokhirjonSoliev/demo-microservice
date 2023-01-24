@@ -1,4 +1,4 @@
-FROM altairbob/jdk-17-sshd AS builder
+FROM maven AS MAVEN_BUILD
 
 MAINTAINER tokhirjon007@gmail.com
 
