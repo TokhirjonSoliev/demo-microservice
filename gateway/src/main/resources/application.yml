@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: ap-gateway
+    name: api-gateway
   cloud:
     gateway:
       routes:
@@ -24,7 +24,5 @@ spring:
             - Path=/api/inventory/**
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     serviceUrl:
       defaultZone: http://165.232.114.125:8671/eureka/

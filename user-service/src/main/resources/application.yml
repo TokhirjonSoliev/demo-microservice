@@ -14,8 +14,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     serviceUrl:
       defaultZone: http://165.232.114.125:8671/eureka/
 server:
