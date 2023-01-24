@@ -5,6 +5,6 @@ spring:
     mongodb:
       database: product_service
       port: 27017
-      host: localhost
+      host: product-mongo
 server:
   port: 8082

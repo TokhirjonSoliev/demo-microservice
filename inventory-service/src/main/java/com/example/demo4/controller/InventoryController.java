@@ -3,6 +3,7 @@ package com.example.demo4.controller;
 import com.example.demo4.dto.InventoryResponse;
 import com.example.demo4.service.InventoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

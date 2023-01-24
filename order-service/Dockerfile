@@ -10,9 +10,10 @@ RUN mvn clean package
 
 FROM altairbob/jdk-17-sshd
 
-WORKDIR /app
+WORKDIR /app/order-service
 
-COPY --from=MAVEN_BUILD /build/target/*.jar /app/
+ARG JAR_FILE=target/order-service-0.0.1-SNAPSHOT.jar
+COPY  ${JAR_FILE} order-service.jar
 
 EXPOSE 8083
-ENTRYPOINT ["java", "-jar", "*.jar"]
+ENTRYPOINT ["java", "-jar", "order-service.jar"]

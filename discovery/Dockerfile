@@ -1,4 +1,4 @@
-FROM maven AS MAVEN_BUILD
+FROM altairbob/jdk-17-sshd AS builder
 
 MAINTAINER tokhirjon007@gmail.com
 
@@ -10,9 +10,10 @@ RUN mvn clean package
 
 FROM altairbob/jdk-17-sshd
 
-WORKDIR /app
+WORKDIR /app/discovery-server
 
-COPY --from=MAVEN_BUILD /build/target/*.jar /app/
+ARG JAR_FILE=target/discovery-server-0.0.1-SNAPSHOT.jar
+COPY  ${JAR_FILE} discovery.jar
 
 EXPOSE 8761
-ENTRYPOINT ["java", "-jar", "*.jar"]
+ENTRYPOINT ["java", "-jar", "discovery.jar"]

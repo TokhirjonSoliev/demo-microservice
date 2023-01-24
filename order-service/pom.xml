@@ -16,6 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <start-class>com.example.demo3.Demo3Application</start-class>
     </properties>
     <dependencies>
         <dependency>
@@ -106,15 +107,18 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.2.1</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <from>
-                        <image>altairbob/jdk-17-sshd</image>
-                    </from>
-                    <to><image>registry.hub.docker.com/tokhir1799/${artifactId}</image></to>
+                    <mainClass>com.example.demo3.Demo3Application</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

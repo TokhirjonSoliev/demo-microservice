@@ -10,9 +10,10 @@ RUN mvn clean package
 
 FROM altairbob/jdk-17-sshd
 
-WORKDIR /app
+WORKDIR /app/inventory-service
 
-COPY --from=MAVEN_BUILD /build/target/*.jar /app/
+ARG JAR_FILE=target/inventory-service-0.0.1-SNAPSHOT.jar
+COPY  ${JAR_FILE} inventory-service.jar
 
 EXPOSE 8084
-ENTRYPOINT ["java", "-jar", "*.jar"]
+ENTRYPOINT ["java", "-jar", "inventory-service.jar"]
