@@ -7,7 +7,7 @@ spring:
     gateway:
       routes:
         - id: user-service
-          uri: http://user-service:8081/
+          uri: http://165.232.114.125:8081/
           predicates:
             - Path=/api/user/**
         - id: product-service
@@ -27,4 +27,4 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8671/eureka/
+      defaultZone: http://165.232.114.125:8671/eureka/
