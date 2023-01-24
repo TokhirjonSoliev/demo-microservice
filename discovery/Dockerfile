@@ -12,7 +12,8 @@ FROM altairbob/jdk-17-sshd
 
 WORKDIR /app/discovery-server
 
-ARG JAR_FILE="discovery-server-0.0.1-SNAPSHOT.jar"
+ARG JAR_FILE=target/discovery-server-0.0.1-SNAPSHOT.jar
+RUN echo ".git" > .dockerignore
 ADD  ${JAR_FILE} discovery.jar
 
 EXPOSE 8761
